@@ -5,7 +5,6 @@ export default function HomePage() {
     return (
         <div>
             <div className="homepageUpperDiv">
-                <NavBar comp="Home"/>
                 <header>
                     <div className="header-heading">
                         <p>Welcome to My<span className="header-span">Jobs</span></p>
