@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import NavBar from './NavBar.js'
 
 export default function HomePage() {
@@ -9,12 +10,11 @@ export default function HomePage() {
                     <div className="header-heading">
                         <p>Welcome to My<span className="header-span">Jobs</span></p>
                         <button className="header-button">
-                            Get Started
+                            <Link to="/signUp">Get Started</Link>
                         </button>
                     </div>
-                    <div className="header-image">
-                        <img alt="header-image" src="header-img.jpg" ></img>
-                    </div>
+
+                    <img className="header-image" alt="header image" src="header-img.jpg" />
                 </header>
             </div>
 
