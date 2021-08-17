@@ -1,10 +1,5 @@
-import React from 'react';
-import '../App.css';
-import NavBar from './NavBar.js';
-import {BrowserRouter as Router , Link , Route} from 'react-router-dom';
-import Login from './Login';
-import NavLoginButton from './NavLoginButton';
-
+import React from 'react'
+import NavBar from './NavBar.js'
 
 export default function HomePage() {
     return (
