@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import NavBar from './NavBar.js'
 
 export default function HomePage() {
     return (
@@ -14,7 +13,7 @@ export default function HomePage() {
                         </button>
                     </div>
 
-                    <img className="header-image" alt="header image" src="header-img.jpg" />
+                    <img className="header-image" alt="" src="header-img.jpg" />
                 </header>
             </div>
 

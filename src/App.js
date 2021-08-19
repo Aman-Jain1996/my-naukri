@@ -7,6 +7,8 @@ import SignUp from './components/signUp.js'
 import ForgotPassword from './components/ForgotPassword'
 import ResetPassword from './components/ResetPassword'
 
+export const baseUrl=" https://jobs-api.squareboat.info/api/v1/";
+
 function App() {
   return (
     <Router>

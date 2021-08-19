@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function NavBar() {
     const location = useLocation();
-    const buttonComp = ["/login","/signUp"]
+    const buttonComp = ["/login","/signup"]
     return (
         <div>
             <div className="nav-bar">

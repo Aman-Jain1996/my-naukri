@@ -16,6 +16,7 @@
 body{
   background: #43AFFF33 0% 0% no-repeat padding-box;
   min-height:100vh;
+  box-sizing: border-box;
 }
 
 .homepageUpperDiv{
@@ -167,6 +168,7 @@ a {
   position: absolute;
   top:160px;
   left:30%;
+  display: block;
 }
 
 .forgot-para{
@@ -176,7 +178,8 @@ a {
 }
 
 .signUp{
-  top:100px;
+  top:80px;
+  margin-bottom: 1rem;
 }
 
 .form-heading{
@@ -210,7 +213,7 @@ a {
 .submit-button{
   display: block;
   text-align: center;
-  margin: 2rem auto;
+  margin: 2rem auto 1rem;
   border: 1px solid #43AFFF;
   border-radius: 5px;
   padding: 10px 2rem;
@@ -230,6 +233,17 @@ a {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 5px;
+}
+
+.forgot-div .link{
+  margin-bottom: 10px;
+}
+
+.error{
+  color:red;
+  font-size: 12px;
+  text-align: right;
+  padding: 0 1rem;
 }
 
 .link{
@@ -253,27 +267,35 @@ a {
   flex-direction: column;
 }
 
-/* .btn-container{
-  width:50%;
+.donate-now {
+  list-style-type: none;
   display: flex;
-  justify-content: space-evenly;
+  align-items: center;
 }
 
-.btn:first-of-type{
+.donate-now li {
+  width: 120px;
+  height: 30px;
+  position: relative;
+}
+
+.donate-now input[type="radio"] {
+  opacity: 0.01;
+  z-index: 100;
+}
+
+.donate-now input[type="radio"]:checked+label,
+.Checked+label {
   background: var(--unnamed-color-43afff);
-  border: 1px solid var(--unnamed-color-43afff);
-  border-radius: 5px;
-  font-size: 14px;
-  width:40%;
+  color:var(--unnamed-color-ffffff);
 }
 
-.btn{
-  background: #E8E8E833;
-  border: 1px solid #C6C6C6;
-  border-radius: 5px;
-  color: var(--unnamed-color-303f60);
-  font-size: 12px;
-  width:40%;
-} */
-
-
+.donate-now label {
+  padding: 5px;
+  border: 1px solid #CCC;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  z-index: 90;
+  color:var(--unnamed-color-43afff);
+} 
