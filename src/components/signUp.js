@@ -1,55 +1,117 @@
 import React from 'react'
-import {Link} from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 import { useState } from 'react';
+import axios from 'axios';
+import { baseUrl } from '../App';
 
 export default function SignUp() {
 
     const [email, setemail] = useState("");
+    const history = useHistory();
     const [password, setPassword] = useState("");
-    const [confirmPass, setConfirmpass] = useState("");
+    const [confirmPassword, setconfirmPassword] = useState("");
     const [name, setName] = useState("");
     const [skills, setSkills] = useState("");
-    const [role, setRole] = useState(0);
-    const[error,setError]=useState({name:"",password:"",email:""});
+    const [userRole, setRole] = useState(0);
+    const [error,setError]=useState({});
 
     function changeHandler(e){
+        let nameField = document.querySelector("#name");
+        let passField = document.querySelector("#password");
+        let cnfrmField = document.querySelector("#cnfrm-password");
+        let emailField = document.querySelector("#email");
+        let skillsField = document.querySelector("#skills");
+
         let fieldName = e.target.name;
         if(fieldName === "name") setName(e.target.value)
         if(fieldName === "password") setPassword(e.target.value)
         if(fieldName === "skills") setSkills(e.target.value)
-        if(fieldName === "confirmPass") setConfirmpass(e.target.value)
+        if(fieldName === "confirmPass") setconfirmPassword(e.target.value)
         if(fieldName === "email") setemail(e.target.value)
         if(fieldName === "option") setRole(e.target.value)
+        nameField.style.borderColor="";
+        passField.style.borderColor="";
+        cnfrmField.style.borderColor="";
+        emailField.style.borderColor="";
+        skillsField.style.borderColor="";
     }
 
     function submitHandler(e){
         e.preventDefault();
+        let nameField = document.querySelector("#name");
+        let passField = document.querySelector("#password");
+        let cnfrmField = document.querySelector("#cnfrm-password");
+        let emailField = document.querySelector("#email");
+        let skillsField = document.querySelector("#skills");
+    
+        let errors={};
         if(name === "" )
         {
-            console.log("inside name")
-            setError({...error,name:"This field is mandatory."});
-            console.log(error)
-        }
-        if(password === "" || confirmPass === "")
-        {
-            console.log("inside pass")
-            setError({...error,password:"This field is mandatory."});
-            console.log(error)
+            errors.name="This field is mandatory";
+            nameField.style.borderColor="red";
+            setError(errors)
         }
         if(email === "")
         {
-            console.log("inside emial")
-            setError({...error,email:"This field is mandatory."});
-            console.log(error)
+            errors.email="This field is mandatory";
+            emailField.style.borderColor="red";
+            setError(errors)
+        }
+        if(password=== ""||confirmPassword=== "")
+        {
+            errors.password="This field is mandatory";
+            passField.style.borderColor="red";
+            cnfrmField.style.borderColor="red";
+            setError(errors)
+        }
+        if(skills === "")
+        {
+            errors.message="This field is mandatory";
+            skillsField.style.borderColor="red";
+            setError(errors)
         }
         else{
-            console.log("sb bhadiya");
+            nameField.style.borderColor="";
+            passField.style.borderColor="";
+            cnfrmField.style.borderColor="";
+            emailField.style.borderColor="";
+            errors={};
+
+            let data = {email,userRole:Number(userRole),password,confirmPassword,name,skills};
+
+            axios.post(baseUrl + "/auth/register",data)
+            .then(res => {
+                console.log(res);
+                history.push("/homescreen");
+            })
+            .catch(err => {
+                if(err.response.data.message !== undefined)
+                    errors.message=err.response.data.message;
+                else if(err.response.data.errors !== undefined){
+                    let errData = err.response.data.errors;
+                    console.log(errData)
+                    console.log(userRole)
+                    for(let key of Object.keys(errData)){
+                        if(errData[key].name !==undefined)
+                            errors.name = errData[key].name;
+                        else if(errData[key].password !==undefined)
+                            errors.password = errData[key].password;
+                        else if(errData[key].email !==undefined)
+                            errors.email = errData[key].email;
+                        else if(errData[key].confirmPassword !== undefined)
+                            errors.password = errData[key].confirmPassword;
+                        else if(errData[key].skills !== undefined)
+                            errors.message = errData[key].skills;
+                    }
+                }
+                setError(errors)
+            })
         }
-        console.log(error)
     }
 
     return (
-        <div className="form signUp">
+        <div className="form-wrapper">
+            <div className="form signUp">
             <h4 className="form-heading">Signup</h4>
             <div className="form-container">
             <form>
@@ -79,7 +141,7 @@ export default function SignUp() {
                 <div className="password-div">
                     <div className="form-row">
                         <label className="form-label" htmlFor="password">Create Password*</label>                 
-                        <input className="form-input" onChange={changeHandler} type="text" id="password" placeholder="Enter your Password..." name="passowrd" />
+                        <input className="form-input" onChange={changeHandler} type="text" id="password" placeholder="Enter your Password..." name="password" />
                     </div>
                     <div className="form-row">
                         <label className="form-label" htmlFor="cnfrm-password">Confirm Password*</label>                 
@@ -90,6 +152,7 @@ export default function SignUp() {
                 <div className="form-row">
                     <label className="form-label" htmlFor="skills">Skills</label>                 
                     <input className="form-input" onChange={changeHandler} type="text" id="skills" placeholder="Enter comma seperated skills" name="skills" />
+                    <p className="error">{error.message}</p>
                 </div>
                 <button className ="submit-button" onClick={submitHandler}> Signup</button>
             </form>
@@ -97,7 +160,9 @@ export default function SignUp() {
             <p className="redirection-para">
                 Have an account? <Link className="link" to="/login">Login</Link>
             </p>
+            </div>
         </div>
+        
     )
 }
 

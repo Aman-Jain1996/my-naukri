@@ -47,7 +47,7 @@ export default function Login() {
             axios.post(baseUrl + "/auth/login",data)
             .then(res => {
                 setError("");
-                console.log("submit");
+                console.log(res);
                 history.push("/homescreen");
             })
             .catch(err => {

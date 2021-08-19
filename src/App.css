@@ -178,7 +178,8 @@ a {
 }
 
 .signUp{
-  top:80px;
+  position: static;
+  top:0px;
   margin-bottom: 1rem;
 }
 
@@ -284,8 +285,7 @@ a {
   z-index: 100;
 }
 
-.donate-now input[type="radio"]:checked+label,
-.Checked+label {
+.donate-now input[type="radio"]:checked+label{
   background: var(--unnamed-color-43afff);
   color:var(--unnamed-color-ffffff);
 }
@@ -299,3 +299,8 @@ a {
   z-index: 90;
   color:var(--unnamed-color-43afff);
 } 
+
+.form-wrapper{
+  position: relative;
+  padding-bottom:2rem;
+}
