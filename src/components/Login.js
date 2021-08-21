@@ -17,6 +17,7 @@ export default function Login() {
     }
 
     function submitHandler(e){
+        document.querySelector("#success-para").innerText="";
         var emailField = document.querySelector("#email");
         var passwordField = document.querySelector("#password");
         e.preventDefault();
@@ -47,8 +48,14 @@ export default function Login() {
             axios.post(baseUrl + "/auth/login",data)
             .then(res => {
                 setError("");
-                console.log(res);
-                history.push("/homescreen");
+                let responseData = res.data;
+                localStorage.setItem("userEmail",responseData.data.email)
+                localStorage.setItem("userToken",responseData.data.token)
+                localStorage.setItem("userName",responseData.data.name)
+                document.querySelector("#success-para").innerText="Logged in Successfully....";
+                setTimeout(()=>{
+                    history.push("/homescreen");
+                },1000)
             })
             .catch(err => {
                 if(err.response.data.message !== undefined)
@@ -76,6 +83,7 @@ export default function Login() {
                     </div>                    
                     <input className="form-input" type="text" name="password" id="password" onChange={changeHandler} placeholder="Enter your Password..." />
                     <p className="error">{error}</p>
+                    <p className="success" id="success-para"></p>
                 </div>
                 <button className ="submit-button" onClick={submitHandler}>Login</button>
             </form>

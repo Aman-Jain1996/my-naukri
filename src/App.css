@@ -247,6 +247,12 @@ a {
   padding: 0 1rem;
 }
 
+.success{
+  color : green;
+  font-size: 16px;
+  padding-top: 1rem;
+}
+
 .link{
   color: var(--unnamed-color-43afff);
   font-weight: bold;
@@ -303,4 +309,42 @@ a {
 .form-wrapper{
   position: relative;
   padding-bottom:2rem;
+}
+
+.jobPost-link{
+  position: relative;
+  right:-82%;
+  display: inline-block;
+  top:-55px;
+  opacity: 0.8;
+  font-size: 0.8rem;
+}
+
+.logout-div{
+  position:relative;
+  display: inline-block;
+  right:-85%;
+  top:-68px;
+  border-radius: 25px;
+  opacity: 1;
+  width: 40px;
+  height: 40px;
+  background: #D9EFFF 0% 0% no-repeat padding-box;
+}
+
+.nameInitial{
+  position: relative;
+  top:11px;
+  left:37%;
+  color:var(--unnamed-color-303f60);
+  opacity: 0.8;
+}
+
+.arrow-span{
+  position: relative;
+  display: inline-block;
+  top:-50px;
+  left:86%;
+  opacity: 0.8;
+  font-size: 1.2rem;
 }

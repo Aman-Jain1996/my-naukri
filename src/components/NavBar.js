@@ -5,14 +5,15 @@ import { Link } from 'react-router-dom';
 
 export default function NavBar() {
     const location = useLocation();
-    const buttonComp = ["/login","/signup"]
+    const buttonComp = ["/","/forgotPassword","/resetPassword"];
+
     return (
         <div>
             <div className="nav-bar">
                 <div className="navBar-header">
                     <Link to="/">My<span className="header-span">Jobs</span></Link>
                 </div>
-                {!buttonComp.includes(location.pathname) ? <NavLoginButton /> : null}
+                {buttonComp.includes(location.pathname) ? <NavLoginButton /> : null}
             </div>
         </div>
     )

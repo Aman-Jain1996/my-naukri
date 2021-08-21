@@ -37,6 +37,7 @@ export default function SignUp() {
     }
 
     function submitHandler(e){
+        document.querySelector("#success-para").innerText="";
         e.preventDefault();
         let nameField = document.querySelector("#name");
         let passField = document.querySelector("#password");
@@ -45,6 +46,7 @@ export default function SignUp() {
         let skillsField = document.querySelector("#skills");
     
         let errors={};
+        // setError(errors);
         if(name === "" )
         {
             errors.name="This field is mandatory";
@@ -75,22 +77,25 @@ export default function SignUp() {
             passField.style.borderColor="";
             cnfrmField.style.borderColor="";
             emailField.style.borderColor="";
-            errors={};
 
             let data = {email,userRole:Number(userRole),password,confirmPassword,name,skills};
 
             axios.post(baseUrl + "/auth/register",data)
             .then(res => {
-                console.log(res);
-                history.push("/homescreen");
+                let responseData = res.data;
+                document.querySelector("#success-para").innerText="SignUp Successful .....";
+                localStorage.setItem("userEmail",responseData.data.email);
+                localStorage.setItem("userToken",responseData.data.token);
+                localStorage.setItem("userName",responseData.data.name);
+                setTimeout(()=>{
+                    history.push("/homescreen");
+                },1000);
             })
             .catch(err => {
                 if(err.response.data.message !== undefined)
                     errors.message=err.response.data.message;
                 else if(err.response.data.errors !== undefined){
                     let errData = err.response.data.errors;
-                    console.log(errData)
-                    console.log(userRole)
                     for(let key of Object.keys(errData)){
                         if(errData[key].name !==undefined)
                             errors.name = errData[key].name;
@@ -153,6 +158,7 @@ export default function SignUp() {
                     <label className="form-label" htmlFor="skills">Skills</label>                 
                     <input className="form-input" onChange={changeHandler} type="text" id="skills" placeholder="Enter comma seperated skills" name="skills" />
                     <p className="error">{error.message}</p>
+                    <p className="success" id="success-para" ></p>
                 </div>
                 <button className ="submit-button" onClick={submitHandler}> Signup</button>
             </form>

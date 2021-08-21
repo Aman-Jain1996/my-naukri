@@ -6,8 +6,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import SignUp from './components/signUp.js'
 import ForgotPassword from './components/ForgotPassword'
 import ResetPassword from './components/ResetPassword'
+import HomeScreen from './components/HomeScreen'
 
-export const baseUrl=" https://jobs-api.squareboat.info/api/v1/";
+export const baseUrl = "https://jobs-api.squareboat.info/api/v1/";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
     <div className="App">
       <div className="homepageUpperDiv">
       <NavBar/>
-          <Switch>
+      <Switch>
           <Route exact path='/'>
               <HomePage />
             </Route>
@@ -31,9 +32,13 @@ function App() {
             <Route path='/resetPassword'>
               <ResetPassword />
             </Route>
+            <Route path='/homescreen'>
+              <HomeScreen />
+            </Route>
           </Switch>
       </div>
     </div>
+    
     </Router>
   );
 }
