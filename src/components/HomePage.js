@@ -1,33 +1,30 @@
 import React from 'react'
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { useState ,useEffect } from 'react';
 
 export default function HomePage(props) {
 
     const location = useLocation()
-    const history = useHistory();
+    const [logOut, setlogOut] = useState(false);
+
+    useEffect(() => {
+        if(location.search === "?Logout"){
+            setlogOut(true);
+        }
+    }, [])
     
     function closeHandler(e){
         document.querySelector(".logoutAlert-success").style.display = "none";
-    }
-
-    function logout(){
-        if(location.state!==undefined && location.state.data === "Logout"){
-            history.location.state.data=undefined;
-            console.log("aman")
-            return (<div className="logoutAlert-success" >
-            <span id="content">Logged out successfully</span>
-            <span id="close" onClick={closeHandler}>X</span>
-        </div>)
-        }else{
-            console.log("amam")
-            return null;
-        }
     }
     
     return (
         <div>
             <div className="homepageUpperDiv">
-                {logout()}
+                {logOut && <div className="logoutAlert-success" >
+                    <span id="content">Logged out successfully</span>
+                    <span id="close" onClick={closeHandler}>X</span>
+                    </div>
+                }
                 <header>
                     <div className="header-heading">
                         <p>Welcome to My<span className="header-span">Jobs</span></p>

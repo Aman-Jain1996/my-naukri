@@ -3,8 +3,6 @@ import {React,useEffect} from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import NoPost from './NoPost';
 
-//  
-
 export default function HomeScreen(props) {
     let count =0;
     const history =useHistory()
@@ -26,10 +24,6 @@ export default function HomeScreen(props) {
         count++;
     }
 
-    function logoutHandler(){
-        history.push({pathname:"/",state:{data:"Logout"}})
-    }
-
     return (
         <>
             <div className="jobPost-link">
@@ -45,7 +39,10 @@ export default function HomeScreen(props) {
                 Jobs posted by you
             </div>
             <div className="logoutAlert-div" >
-                <span onClick={logoutHandler}>Logout</span>
+                <span onClick={() => {
+                    history.push({pathname:"/?Logout"})}}>
+                        Logout
+                </span>
             </div>
             <NoPost />
             <div className="posts-Div">
