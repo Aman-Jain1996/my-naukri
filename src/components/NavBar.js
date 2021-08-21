@@ -11,7 +11,7 @@ export default function NavBar() {
         <div>
             <div className="nav-bar">
                 <div className="navBar-header">
-                    <Link to="/">My<span className="header-span">Jobs</span></Link>
+                    My<span className="header-span">Jobs</span>
                 </div>
                 {buttonComp.includes(location.pathname) ? <NavLoginButton /> : null}
             </div>

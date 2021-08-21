@@ -1,10 +1,33 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 
-export default function HomePage() {
+export default function HomePage(props) {
+
+    const location = useLocation()
+    const history = useHistory();
+    
+    function closeHandler(e){
+        document.querySelector(".logoutAlert-success").style.display = "none";
+    }
+
+    function logout(){
+        if(location.state!==undefined && location.state.data === "Logout"){
+            history.location.state.data=undefined;
+            console.log("aman")
+            return (<div className="logoutAlert-success" >
+            <span id="content">Logged out successfully</span>
+            <span id="close" onClick={closeHandler}>X</span>
+        </div>)
+        }else{
+            console.log("amam")
+            return null;
+        }
+    }
+    
     return (
         <div>
             <div className="homepageUpperDiv">
+                {logout()}
                 <header>
                     <div className="header-heading">
                         <p>Welcome to My<span className="header-span">Jobs</span></p>
@@ -12,7 +35,6 @@ export default function HomePage() {
                             <Link to="/signUp">Get Started</Link>
                         </button>
                     </div>
-
                     <img className="header-image" alt="" src="header-img.jpg" />
                 </header>
             </div>
@@ -55,6 +77,10 @@ export default function HomePage() {
                     </div>
                 </div>
             </div>
+            
         </div>
+        
     )
+    
+    
 }

@@ -1,5 +1,5 @@
 :root {
-  --unnamed-color-43afff: #43AFFF;
+  --unnamed-color-43afff: #2b8cd6;
   --unnamed-color-ffffff: #FFFFFF;
   --unnamed-color-303f60: #303F60;
   }
@@ -343,8 +343,97 @@ a {
 .arrow-span{
   position: relative;
   display: inline-block;
-  top:-50px;
+  top:-52px;
   left:86%;
   opacity: 0.8;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.addPost-image{
+  height:106px;
+  width:106px;
+}
+
+.noPosts-div{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  position: absolute;
+  bottom:20%;
+  width:100%;
+}
+
+.noPosts-div p{
+  color:var(--unnamed-color-303f60);
+  margin-top:1rem;
+  opacity: 0.8;
+}
+
+.redirection-Link{
+  position: relative;
+  top:-20%;
+  display: flex;
+  flex-flow: column nowrap;
+  left:12%;
+  height:10%;
   font-size: 1.2rem;
+  width:200px;
+
+}
+
+.redirection-Link span{
+  padding-bottom:2rem; 
+  font-size: 0.7rem;
+}
+
+#arrow-up{
+  display: none;
+}
+
+.logoutAlert-div{
+  position:relative;
+  top:-30%;
+  left:87%;
+  padding:10px 1rem;
+  border-radius: 10px 0 10px 10px ;
+  background: var(--unnamed-color-ffffff) ;
+  width:100px;
+  display: none;
+}
+
+.logoutAlert-div span{
+  font-weight: bolder;
+  color:var(--unnamed-color-303f60);
+  font-size: 0.8rem;
+  cursor:pointer;
+}
+
+.logoutAlert-success{
+  position:absolute;
+  font-weight: bolder;
+  top:12%;
+  left:75%;
+  border-radius: 10px 0 10px 10px ;
+  background: var(--unnamed-color-ffffff) ;
+  width:200px;
+  height:40px;
+  display: inline-flex;
+}
+
+.logoutAlert-success span{
+  color:var(--unnamed-color-303f60);
+  font-size: 0.8rem;
+  
+}
+
+#content{
+  align-self: center;
+  padding: 0 1rem;
+}
+
+#close{
+  padding-top : 5px;
+  cursor: pointer;
 }
