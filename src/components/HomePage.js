@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useState ,useEffect } from 'react';
 
 export default function HomePage(props) {
 
     const location = useLocation()
+    const history = useHistory()
     const [logOut, setlogOut] = useState(false);
 
     useEffect(() => {
@@ -15,6 +16,7 @@ export default function HomePage(props) {
     
     function closeHandler(e){
         document.querySelector(".logoutAlert-success").style.display = "none";
+        history.push("/")
     }
     
     return (

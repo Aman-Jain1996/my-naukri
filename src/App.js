@@ -7,6 +7,7 @@ import SignUp from './components/signUp.js'
 import ForgotPassword from './components/ForgotPassword'
 import ResetPassword from './components/ResetPassword'
 import HomeScreen from './components/HomeScreen'
+import PostJob from './components/postJob'
 
 export const baseUrl = "https://jobs-api.squareboat.info/api/v1/";
 
@@ -34,6 +35,9 @@ function App() {
             </Route>
             <Route path='/homescreen'>
               <HomeScreen />
+            </Route>
+            <Route path='/postJob'>
+              <PostJob />
             </Route>
           </Switch>
       </div>

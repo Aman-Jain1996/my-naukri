@@ -1,7 +1,6 @@
 import React from 'react'
 import NavLoginButton from './NavLoginButton'
 import { useLocation } from 'react-router'
-import { Link } from 'react-router-dom';
 
 export default function NavBar() {
     const location = useLocation();
