@@ -1,12 +1,31 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import ReactPaginate from 'react-paginate';
 import { baseUrl } from '../App';
-import NoApplicants from './NoApplicants';
 
 export default function Post(props) {
 
     const [count, setcount] = useState(0)
-    let arr=[];
+    const [posts,setPosts] = useState(props.posts);
+    const [pageNumber, setpageNumber] = useState(0);
+    let postsPerPage =8;
+    let pageVisited = pageNumber * postsPerPage;
+    
+    function fetchJobPosts(){
+        return posts.slice(pageVisited,pageVisited+postsPerPage).map(item => {
+             return (<div key={item.id} className="jobPosts-div">
+                 <p style={{display:"none"}} >{item.id}</p>
+                 <p className="postTitle">{item.title}</p>
+                 <p className="postDesc" >{item.description[0].toUpperCase() + item.description.slice(1,) }</p>
+                 <div className="location-Div">
+                     <p className="postLocation" > <i className="fa fa-map-marker" style={{color:"#2b8cd6",paddingRight:"5px"}}></i>{item.location}</p>
+                     <button className="view-Applications" onClick={(e)=>clickHandler(e,item)}>view Applications</button>
+                 </div>
+             </div>)
+         })
+     }
+
+
     function clickHandler(e,item){
         document.querySelector(".posts-Div").style.opacity = 0.5;
         document.querySelector(".posts-Div").style.pointerEvents = "none";
@@ -15,7 +34,7 @@ export default function Post(props) {
         axios.get(baseUrl+"/recruiters/jobs/"+item.id+"/candidates",{headers:{"Authorization":localStorage.getItem("userToken")}})
         .then(res => {
             console.log(res.data)
-            if(res.data.message !=undefined){
+            if(res.data.message !== undefined){
                 count=0;
                 let element = <div className="noApplicants">Aman Jain</div>
                 document.querySelector(".application-container").append(element);
@@ -34,18 +53,8 @@ export default function Post(props) {
         document.querySelector(".posts-Div").style.pointerEvents = "";
     }
 
-    function fetchJobPosts(){
-       return props.posts.map(item => {
-            return (<div key={item.id} className="jobPosts-div">
-                <p style={{display:"none"}} >{item.id}</p>
-                <p className="postTitle">{item.title}</p>
-                <p className="postDesc" >{item.description[0].toUpperCase() + item.description.slice(1,) }</p>
-                <div className="location-Div">
-                    <p className="postLocation" > <i className="fa fa-map-marker" style={{color:"#2b8cd6",paddingRight:"5px"}}></i>{item.location}</p>
-                    <button className="view-Applications" onClick={(e)=>clickHandler(e,item)}>view Applications</button>
-                </div>
-            </div>)
-        })
+    function pageChange({selected}){
+        setpageNumber(selected)
     }
 
     return (
@@ -53,6 +62,17 @@ export default function Post(props) {
         <div className="posts-Div">
             {fetchJobPosts()}
         </div>
+        <ReactPaginate 
+            pageCount= {Math.ceil(posts.length / postsPerPage)}
+            previousLabel={"<"}
+            nextLabel = {"> "}
+            onPageChange ={pageChange}
+            containerClassName ={"paginateClass"}
+            previousLinkClassName ={"previousLink"}
+            nextLinkClassName ={"nextLink"}
+            activeLinkClassName = {"activeLink"}
+
+        />
         <div className="applications-div">
             <div className="applicationDiv-header">
                 <span className="header">
