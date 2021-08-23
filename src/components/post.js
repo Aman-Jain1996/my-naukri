@@ -35,7 +35,7 @@ export default function Post(props) {
         .then(res => {
             console.log(res.data)
             if(res.data.message !== undefined){
-                count=0;
+                setcount(0);
                 let element = <div className="noApplicants">Aman Jain</div>
                 document.querySelector(".application-container").append(element);
             }
