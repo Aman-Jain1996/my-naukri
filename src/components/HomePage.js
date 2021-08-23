@@ -12,7 +12,7 @@ export default function HomePage(props) {
         if(location.search === "?Logout"){
             setlogOut(true);
         }
-    }, [])
+    },[location.search])
     
     function closeHandler(e){
         document.querySelector(".logoutAlert-success").style.display = "none";

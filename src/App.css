@@ -569,19 +569,24 @@ a {
   list-style: none;
 }
 
-.paginateClass a:not(.activeLink){
+.previousLink , .nextLink{
   padding: 5px;
   margin: 0 10px;
   color:var(--unnamed-color-303f60);
-}
-
-.activeLink , .previousLink , .nextLink{
-  /* background-color: var(--unnamed-color-303f60); */
-  border: transparent;
-  padding:5px;
-  color:var(--unnamed-color-43afff);
   border-radius: 5px;
   border: 2px solid grey;
-  font-size: 1.1rem;
+}
+
+.paginateClass a:not(.activeLink ,.previousLink , .nextLink){
+  border: transparent;
+  padding:5px;
+  color : var(--unnamed-color-303f60);
+}
+
+.activeLink{
+  border: transparent;
+  padding:5px;
+  background-color: #43AFFF33;
+  color:var(--unnamed-color-43afff);
   font-weight: bold;
 }
